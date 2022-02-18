@@ -5,7 +5,7 @@ ICELINK_DIR=$(shell df | grep iCELink | awk '{print $$6}')
 ${warning iCELink path: $(ICELINK_DIR)}
 
 build:
-	yosys -p "synth_ice40 -json $(filename).json -blif $(filename).blif" $(filename).v
+	yosys -p "synth_ice40 -top switch -json $(filename).json -blif $(filename).blif" $(filename).v
 	nextpnr-ice40 --lp1k --package cm36 --json $(filename).json --pcf $(pcf_file) --asc $(filename).asc --freq 48
 	icepack $(filename).asc $(filename).bin
 
